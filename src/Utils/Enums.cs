@@ -1,14 +1,3 @@
-namespace ConsoleApplication.Enums
+namespace scryptdnx.Utils
 {
-    public enum MenuItem
-    {
-        Generate
-    }
-
-    public enum GenerateItem
-    {
-        Random,
-        Encode,
-        Decode
-    }
 }
