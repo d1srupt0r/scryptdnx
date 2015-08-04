@@ -9,7 +9,7 @@
 			// Type of configuration. Possible values: "node", "mono".
 			"type": "mono",
 			// Workspace relative or absolute path to the program.
-			"program": "bin/ConsoleApplication.exe",
+			"program": "bin/scryptdnx.exe",
 			// Automatically stop program after launch.
 			"stopOnEntry": false,
 			// Command line arguments passed to the program.
