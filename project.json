@@ -12,6 +12,8 @@
       "dependencies": {
         "System.Console": "4.0.0-beta-*",
         "System.Collections": "4.0.10",
+        "System.Text.RegularExpressions": "4.0.10",
+        "System.Reflection.TypeExtensions": "4.0.0",
         "System.Linq": "4.0.0"
       }
     }

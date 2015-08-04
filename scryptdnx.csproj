@@ -5,6 +5,7 @@
     <ItemGroup>
         <CSFile Include = "src\Program.cs"/>
         <CSFile Include = "src\Utils\Enums.cs"/>
+        <CSFile Include = "src\Utils\Const.cs"/>
         <CSFile Include = "src\Utils\Extensions.cs"/>
         <CSFile Include = "src\CommandLine\Param.cs"/>
         <CSFile Include = "src\CommandLine\Options.cs"/>

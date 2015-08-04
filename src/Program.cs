@@ -1,49 +1,77 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
+using scryptdnx.Utils;
 using scryptdnx.CommandLine;
 
 namespace scryptdnx
 {
     public class Program
     {
-        private static Options po = new Options();
+        private static Options po;
 
         public static void Main(string[] args)
         {
-            Init();
+            try { Process(args); }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+#if DEBUG
+                    Console.WriteLine(e.StackTrace);
+#endif
+            }
+        }
 
-            Console.Write("Selection: ");
-            var input = Console.ReadLine();
-            Console.WriteLine(Parse(input));
+        private static IList<string> Combine(params string[] values) =>
+            values.String()
+                .Split(values.Parse(Const.CommandPrefix + @"\S+"), StringSplitOptions.RemoveEmptyEntries)
+                .ReplaceAll(Const.AliasPrefix, Const.GetValue)
+                .ToList();
+
+        private static string Execute(Param option, string value) =>
+            option.Method(value, null);
+
+        private static void ExecuteAll(IEnumerable<Param> options, IList<string> values)
+        {
+            for (int i = 0; i < values.Count; i++)
+            {
+                foreach (var option in options)
+                {
+                    if (option is Param)
+                        values[i] = Execute(option, values[i]);
+                }
+            }
         }
 
         private static void Init()
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine($"The current time is, {DateTime.Now}");
-            po.List.ForEach(o => Console.WriteLine(o.ToString()));
-        }
-
-        private static string Parse(string input)
-        {
-            var result = string.Empty;
-
-            // TODO: parse here...
-
-            return result;
-        }
-
-        private static string GetHex(int size)
-        {
-            var result = new List<string>();
-            var junk = "0123456789abcdef";
-            var r = new Random(8048 + 3066); // same value
-            for(int i = 0; i < size; i++)
+            // ToDo: do cool things like work with triggers
+            po = new Options
             {
-                result.Add(junk[r.Next(junk.Length)].ToString());
+                Verbose = false
+            };
+        }
+
+        private static void Output(IEnumerable<string> values)
+        {
+            foreach (var value in values)
+            {
+                if (!string.IsNullOrEmpty(value))
+                    Console.WriteLine(po.Verbose ? "{0} : {1}" : "{0}", value, value.Length);
             }
-            return string.Join(string.Empty, result);
+        }
+
+
+        private static void Process(string[] args)
+        {
+            Console.WriteLine(args.String(","));
+
+            Init();
+            var options = po.GetAll(args);
+            var junk = Combine(args);
+            ExecuteAll(options, junk);
+            Output(junk);
         }
     }
 }
