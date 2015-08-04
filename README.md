@@ -1,0 +1,2 @@
+# scryptdnx
+scrypt with dnxcore
