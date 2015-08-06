@@ -12,7 +12,9 @@ namespace scryptdnx.CommandLine
 		public List<Param> List = new List<Param>
 		{
 			new Param(new [] { "/help" }, "Display [h]elp")
-			,new Param(new[] { "/hc", "/hexcolor" }, "Random [g]enerator", (x, k) => x.HexColor())
+			,new Param(new[] { "/e", "/encode" }, "Base64 [e]ncode text", (x, k) => x.Encode())
+			,new Param(new[] { "/d", "/decode" }, "Base64 [d]ecode text", (x, k) => x.Decode())
+			,new Param(new[] { "/g", "/generator" }, "Random [g]enerator", (x, k) => x.HexColor())
 		};
 
 		/* ToDo: Possibly store this in a local variable...

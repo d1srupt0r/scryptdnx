@@ -62,14 +62,15 @@ namespace scryptdnx
             }
         }
 
-
         private static void Process(string[] args)
         {
             Console.WriteLine(args.String(","));
 
             Init();
+
             var options = po.GetAll(args);
             var junk = Combine(args);
+
             ExecuteAll(options, junk);
             Output(junk);
         }

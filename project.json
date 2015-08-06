@@ -1,20 +1,30 @@
 {
   "version": "1.0.0-*",
+  "description": "scrypt is a basic encoding / decoding utility namely written for use encoding and decoding Base64 strings",
+  "authors": [ "Disruptor" ],
+
   "dependencies": {
     "Mono.Gendarme": "2.11.0.20121120"
   },
+
   "commands": {
     "run": "ConsoleApplication"
   },
+
+  "compile": ["*.cs"],
+
   "frameworks": {
     "dnx451": {},
     "dnxcore50": {
       "dependencies": {
         "System.Console": "4.0.0-beta-*",
         "System.Collections": "4.0.10",
-        "System.Text.RegularExpressions": "4.0.10",
+        "System.Linq": "4.0.0",
         "System.Reflection.TypeExtensions": "4.0.0",
-        "System.Linq": "4.0.0"
+        "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-*",
+        "System.Security.Cryptography.Encryption": "4.0.0-beta-*",
+        "System.Text.Encoding": "4.0.10",
+        "System.Text.RegularExpressions": "4.0.10"
       }
     }
   }
