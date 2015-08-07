@@ -38,37 +38,41 @@ namespace Scryptdnx
                 case Enums.ParamType.Command:
                     return option.Method(value, null);
                 case Enums.ParamType.Crypto:
-                    var key = $"{value.Limit()} {option.Cmds.Last()} key";
+                    Console.Write($"{value.Limit()} {option.Cmds.Last()} key: ");
+                    var key = Console.ReadLine();
                     return option.Method(value, key);
             }
 
             return value;
         }
 
-        private static void ExecuteAll(IEnumerable<Param> options, IList<string> values)
+        private static void ExecuteAll()
         {
-            for (int i = 0; i < values.Count; i++)
+            for (int i = 0; i < po.Junk.Count; i++)
             {
-                foreach (var option in options)
+                foreach (var option in po.Params)
                 {
                     if (option is Param)
-                        values[i] = Execute(option, values[i]);
+                        po.Junk[i] = Execute(option, po.Junk[i]);
                 }
             }
         }
 
-        private static void Init()
+        private static void Init(string[] args)
         {
-            // ToDo: do cool things like work with triggers
-            po = new Options
-            {
-                Verbose = false
+            // ToDo: 
+            po = new Options {
+                Params = Options.GetAll(args),
+                Junk = Combine(args)
             };
+            po.Verbose = po.Params.Any(o => o.Cmds.Contains("/v"));
+            if (po.Verbose)
+                Console.WriteLine(args.String(","));
         }
 
-        private static void Output(IEnumerable<string> values)
+        private static void Output()
         {
-            foreach (var value in values)
+            foreach (var value in po.Junk)
             {
                 if (!string.IsNullOrEmpty(value))
                     Console.WriteLine(po.Verbose ? "{0} : {1}" : "{0}", value, value.Length);
@@ -77,16 +81,9 @@ namespace Scryptdnx
 
         private static void Process(string[] args)
         {
-            Console.WriteLine(args.String(","));
-
-            Init();
-
-            var options = po.GetAll(args);
-            po.Verbose = options.Any(o => o.Cmds.Contains("/v"));
-            var junk = Combine(args);
-
-            ExecuteAll(options, junk);
-            Output(junk);
+            Init(args);
+            ExecuteAll();
+            Output();
         }
     }
 }

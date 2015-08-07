@@ -12,9 +12,9 @@ namespace Scryptdnx.CommandLine
 		public string Help { get; set; }
 
 		public Func<string, string, string> Method { get; set; }
-		
+
 		public short Order { get; set; }
-		
+
 		public Enums.ParamType Type { get; set; }
 
 		public Param(string[] cmds, string help, Enums.ParamType type = Enums.ParamType.None)
@@ -24,7 +24,7 @@ namespace Scryptdnx.CommandLine
 			Type = type;
 		}
 
-		public Param(short order, string[] cmds, string help, Func<string, string, string> @method, Enums.ParamType type)
+		public Param(short order, string[] cmds, Func<string, string, string> @method, string help, Enums.ParamType type)
 			: this(cmds, help, type)
 		{
 			Order = order;

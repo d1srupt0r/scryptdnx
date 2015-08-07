@@ -6,23 +6,28 @@ using Scryptdnx.Utils;
 namespace Scryptdnx.CommandLine
 {
 	public class Options
-	{		
-		public List<Param> List { get; } = new List<Param>
+	{
+		private static List<Param> _list { get; } = new List<Param>
 		{
-			new Param(new [] { "/help" }, "Display [h]elp")
-			,new Param(new [] { "/v", "/verbose" }, "Display [v]erbose output", Enums.ParamType.Trigger)
-			,new Param(1, new[] { "/g", "/generator" }, "Random [g]enerator", (x, k) => x.HexColor(), Enums.ParamType.Command)
-			,new Param(2, new[] { "/e", "/encode" }, "Base64 [e]ncode text", (x, k) => x.Encode(), Enums.ParamType.Command)
-			,new Param(3, new[] { "/d", "/decode" }, "Base64 [d]ecode text", (x, k) => x.Decode(), Enums.ParamType.Command)
+			new Param(new[] { "/help" }, "Display [h]elp")
+			,new Param(new[] { "/v", "/verbose" }, "Display [v]erbose output", Enums.ParamType.Trigger)
+			,new Param(1, new[] { "/c", "/cipher" }, (x, k) => x.Cipher(k), "Run [c]ipher on text using a [k]ey (default Z:W)", Enums.ParamType.Crypto)
+			,new Param(2, new[] { "/f", "/flip" }, (x, k) => x.Flip(), "Execute character [f]lip on text", Enums.ParamType.Command)
+			,new Param(3, new[] { "/e", "/encode" }, (x, k) => x.Encode(), "Base64 [e]ncode text", Enums.ParamType.Command)
+			,new Param(4, new[] { "/d", "/decode" }, (x, k) => x.Decode(), "Base64 [d]ecode text", Enums.ParamType.Command)
+			,new Param(5, new[] { "/t", "/twist" }, (x, k) => x.Twist(), "Run [t]wist on text (alternating case)", Enums.ParamType.Command)
+			,new Param(6, new[] { "/g", "/generator" }, (x, k) => x.HexColor(), "Random [g]enerator", Enums.ParamType.Command)
 		};
-		
+
+		public IList<string> Junk { get; set; }
+
+		public IEnumerable<Param> Params { get; set; }
+
 		public bool Verbose { get; set; }
 
-		/* ToDo: Possibly store this in a local variable...
-	    		 call it 'parse_command_line' or something */
-        public IEnumerable<Param> GetAll(params string[] args) =>
+        public static IEnumerable<Param> GetAll(params string[] args) =>
 			args.ReplaceAll(@"(--|-)", "/")
-                .SelectMany(value => List.Where(param => param.Cmds.Contains(value)))
+                .SelectMany(value => _list.Where(param => param.Cmds.Contains(value)))
                 .OrderBy(o => o.Order);
 	}
 }

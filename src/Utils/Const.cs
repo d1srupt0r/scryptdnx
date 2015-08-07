@@ -7,8 +7,11 @@ namespace Scryptdnx.Utils
 	public static class Const
 	{
 		public const string AliasPrefix = @"[@#]";
+
 		public const string Alphabet = @"abcdefghijklmnopqrstuvwxyz";
+
 		public const string Hex = @"0123456789abcdef";
+
 		public const string CommandPrefix = @"[-/]";
 
 		public static List<System.Reflection.FieldInfo> GetAll =>

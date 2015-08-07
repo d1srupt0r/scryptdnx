@@ -2,11 +2,8 @@
   "locked": false,
   "version": 1,
   "targets": {
-    "DNX,Version=v4.5.1": {
-      "Mono.Gendarme/2.11.0.20121120": {}
-    },
+    "DNX,Version=v4.5.1": {},
     "DNXCore,Version=v5.0": {
-      "Mono.Gendarme/2.11.0.20121120": {},
       "System.Collections/4.0.10": {
         "dependencies": {
           "System.Runtime": "4.0.20"
@@ -319,42 +316,6 @@
     }
   },
   "libraries": {
-    "Mono.Gendarme/2.11.0.20121120": {
-      "sha512": "wViIm1N2DEq5AgZbZgmFO8PLVi3XlnmluP4MWUBCKTuBs/f3vgoJR12HtP5ZGUzgm4vULM4WgrlkV3HmhUNGFg==",
-      "files": [
-        "Mono.Gendarme.2.11.0.20121120.nupkg",
-        "Mono.Gendarme.2.11.0.20121120.nupkg.sha512",
-        "Mono.Gendarme.nuspec",
-        "tools/gendarme.exe",
-        "tools/Gendarme.Framework.dll",
-        "tools/Gendarme.Rules.BadPractice.dll",
-        "tools/Gendarme.Rules.Concurrency.dll",
-        "tools/Gendarme.Rules.Correctness.dll",
-        "tools/Gendarme.Rules.Design.dll",
-        "tools/Gendarme.Rules.Design.Generic.dll",
-        "tools/Gendarme.Rules.Design.Linq.dll",
-        "tools/Gendarme.Rules.Exceptions.dll",
-        "tools/Gendarme.Rules.Gendarme.dll",
-        "tools/Gendarme.Rules.Interoperability.Com.dll",
-        "tools/Gendarme.Rules.Interoperability.dll",
-        "tools/Gendarme.Rules.Maintainability.dll",
-        "tools/Gendarme.Rules.Naming.dll",
-        "tools/Gendarme.Rules.NUnit.dll",
-        "tools/Gendarme.Rules.Performance.dll",
-        "tools/Gendarme.Rules.Portability.dll",
-        "tools/Gendarme.Rules.Security.Cas.dll",
-        "tools/Gendarme.Rules.Security.dll",
-        "tools/Gendarme.Rules.Serialization.dll",
-        "tools/Gendarme.Rules.Smells.dll",
-        "tools/Gendarme.Rules.Ui.dll",
-        "tools/GendarmeWizard.exe",
-        "tools/ICSharpCode.SharpZipLib.dll",
-        "tools/Mono.Cecil.dll",
-        "tools/Mono.Cecil.Mdb.dll",
-        "tools/Mono.Cecil.Pdb.dll",
-        "tools/rules.xml"
-      ]
-    },
     "System.Collections/4.0.10": {
       "serviceable": true,
       "sha512": "ux6ilcZZjV/Gp7JEZpe+2V1eTueq6NuoGRM3eZCFuPM25hLVVgCRuea6STW8hvqreIOE59irJk5/ovpA5xQipw==",
@@ -1097,9 +1058,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "": [
-      "Mono.Gendarme >= 2.11.0.20121120"
-    ],
+    "": [],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": [
       "System.Console >= 4.0.0-beta-*",
