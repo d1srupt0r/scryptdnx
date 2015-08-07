@@ -19,7 +19,7 @@ namespace Scryptdnx.CommandLine
 			,new Param(6, new[] { "/g", "/generator" }, (x, k) => x.HexColor(), "Random [g]enerator", ParamType.Command)
 		};
 
-		public string[] Junk { get; set; }
+		public string[] Junk;
 
 		public IEnumerable<Param> Params { get; set; }
 

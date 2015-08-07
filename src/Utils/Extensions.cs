@@ -14,7 +14,7 @@ namespace Scryptdnx.Utils
                 {
                     var k = key == null ? string.Empty : key.ToLower();
                     var swap = char.ToLower(@"[a-z]:[a-z]".ToRegex().IsMatch(k)
-                        .Default(k, "Z:W", "Cipher format 'A:Z', defaulting to Z:W")
+                        .Default(k, "Z:W")
                         .Split(':').Select(x => char.Parse(x)).Min());
                     var map = Const.Alphabet.Split(swap).SelectMany(g => g.Reverse()).String() + swap;
                     return value.Swap(map).String();
@@ -28,15 +28,15 @@ namespace Scryptdnx.Utils
                 }
 
                 public static TResult Default<TResult>(this bool condition, string value, Func<string, TResult> onTrue) =>
-                        condition ? onTrue(value) : default(TResult);
+                        condition.Default(onTrue(value), default(TResult));
 
-                public static T Default<T>(this bool condition, T trueValue, T falseValue, string message) =>
+                public static T Default<T>(this bool condition, T trueValue, T falseValue) =>
                         condition ? trueValue : falseValue;
 
                 public static string Encode<T>(this T value) =>
                     Convert.ToBase64String(_defaultEncoding.GetBytes(value.ToString()));
 
-                public static string Flip(this string value) =>
+                public static string Flip(this IEnumerable<char> value) =>
                     value.Reverse().String();
 
                 public static string HexColor(this string value)
@@ -86,7 +86,7 @@ namespace Scryptdnx.Utils
                 public static Regex ToRegex(this string value) =>
                     new Regex(@value, RegexOptions.Compiled);
 
-                public static string Twist(this string value) =>
+                public static string Twist(this IEnumerable<char> value) =>
                     value.Select((c, i) => new { Value = c.ToString(), Index = i })
                         .Select(x => x.Index % 4 == 0
                             ? x.Value.First().ToggleCase()
