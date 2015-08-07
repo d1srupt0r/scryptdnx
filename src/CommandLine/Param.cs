@@ -15,16 +15,16 @@ namespace Scryptdnx.CommandLine
 
 		public short Order { get; set; }
 
-		public Enums.ParamType Type { get; set; }
+		public ParamType Type { get; set; }
 
-		public Param(string[] cmds, string help, Enums.ParamType type = Enums.ParamType.None)
+		public Param(string[] cmds, string help, ParamType type = ParamType.None)
 		{
 			Cmds = cmds;
 			Help = help;
 			Type = type;
 		}
 
-		public Param(short order, string[] cmds, Func<string, string, string> @method, string help, Enums.ParamType type)
+		public Param(short order, string[] cmds, Func<string, string, string> @method, string help, ParamType type)
 			: this(cmds, help, type)
 		{
 			Order = order;

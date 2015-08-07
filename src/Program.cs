@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Reflection;
 
 using Scryptdnx.Utils;
@@ -25,19 +24,19 @@ namespace Scryptdnx
             }
         }
 
-        private static IList<string> Combine(params string[] values) =>
+        private static string[] Combine(params string[] values) =>
             values.String()
                 .Split(values.Parse(Const.CommandPrefix + @"\S+"), StringSplitOptions.RemoveEmptyEntries)
                 .ReplaceAll(Const.AliasPrefix, Const.GetValue)
-                .ToList();
+                .ToArray();
 
         private static string Execute(Param option, string value)
         {
             switch (option.Type)
             {
-                case Enums.ParamType.Command:
+                case ParamType.Command:
                     return option.Method(value, null);
-                case Enums.ParamType.Crypto:
+                case ParamType.Crypto:
                     Console.Write($"{value.Limit()} {option.Cmds.Last()} key: ");
                     var key = Console.ReadLine();
                     return option.Method(value, key);
@@ -48,7 +47,7 @@ namespace Scryptdnx
 
         private static void ExecuteAll()
         {
-            for (int i = 0; i < po.Junk.Count; i++)
+            for (int i = 0; i < po.Junk.Length; i++)
             {
                 foreach (var option in po.Params)
                 {
@@ -60,11 +59,12 @@ namespace Scryptdnx
 
         private static void Init(string[] args)
         {
-            // ToDo: 
+            // ToDo:
             po = new Options {
                 Params = Options.GetAll(args),
                 Junk = Combine(args)
             };
+
             po.Verbose = po.Params.Any(o => o.Cmds.Contains("/v"));
             if (po.Verbose)
                 Console.WriteLine(args.String(","));
