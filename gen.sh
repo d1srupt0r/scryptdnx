@@ -1,2 +1,2 @@
 #!/bin/bash
-gendarme -v --html gendarme.html scryptdnx.exe
+gendarme -v --log todo.log --html bin/gendarme.html  bin/scryptdnx.exe
