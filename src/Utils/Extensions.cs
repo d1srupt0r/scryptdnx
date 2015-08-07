@@ -41,6 +41,12 @@ namespace Scryptdnx.Utils
                     .Select(i => Const.Hex[r.Next(Const.Hex.Length)]));
         }
 
+        public static string Limit<T>(this T value, int size = 30)
+        {
+            var x = value is string ? value as string : value.ToString();
+            return x.Length > size ? x.Substring(0, size) + "..." : x;
+        }
+
         public static T[] Parse<T>(this T[] array, string pattern) =>
             array.Where(x => pattern.ToRegex().IsMatch(x.ToString())).ToArray();
 

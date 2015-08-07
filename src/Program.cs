@@ -31,8 +31,19 @@ namespace Scryptdnx
                 .ReplaceAll(Const.AliasPrefix, Const.GetValue)
                 .ToList();
 
-        private static string Execute(Param option, string value) =>
-            option.Method(value, null);
+        private static string Execute(Param option, string value)
+        {
+            switch (option.Type)
+            {
+                case Enums.ParamType.Command:
+                    return option.Method(value, null);
+                case Enums.ParamType.Crypto:
+                    var key = $"{value.Limit()} {option.Cmds.Last()} key";
+                    return option.Method(value, key);
+            }
+
+            return value;
+        }
 
         private static void ExecuteAll(IEnumerable<Param> options, IList<string> values)
         {
