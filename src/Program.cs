@@ -1,17 +1,19 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 
-using scryptdnx.Utils;
-using scryptdnx.CommandLine;
+using Scryptdnx.Utils;
+using Scryptdnx.CommandLine;
 
-namespace scryptdnx
+[assembly: AssemblyVersionAttribute("0.0.1.*")]
+namespace Scryptdnx
 {
-    public class Program
+    public static class Program
     {
         private static Options po;
 
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
             try { Process(args); }
             catch (Exception e)
@@ -69,6 +71,7 @@ namespace scryptdnx
             Init();
 
             var options = po.GetAll(args);
+            po.Verbose = options.Any(o => o.Cmds.Contains("/v"));
             var junk = Combine(args);
 
             ExecuteAll(options, junk);

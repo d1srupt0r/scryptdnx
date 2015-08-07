@@ -11,15 +11,13 @@
         <CSFile Include = "src\CommandLine\Options.cs"/>
     </ItemGroup>
 
-    <UsingTask AssemblyFile="Path\To\GendarmeMsBuild.dll" TaskName="GendarmeMsBuild.Gendarme"/>
-
-    <Target Name = "Build">
+    <Target Name = "Build">        
         <!-- Run the Visual C# compilation using input files of type CSFile -->
         <CSC Sources = "@(CSFile)"
             DebugType="full"
             Optimize="yes"
             OutputAssembly="bin\scryptdnx.exe" >
-
+            
             <!-- Set the OutputAssembly attribute of the CSC task to the name of the executable file that is created -->
             <Output TaskParameter="OutputAssembly"
                 ItemName = "EXEFile" />

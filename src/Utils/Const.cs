@@ -2,9 +2,9 @@ using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace scryptdnx.Utils
+namespace Scryptdnx.Utils
 {
-	public class Const
+	public static class Const
 	{
 		public const string AliasPrefix = @"[@#]";
 		public const string Alphabet = @"abcdefghijklmnopqrstuvwxyz";
@@ -12,7 +12,7 @@ namespace scryptdnx.Utils
 		public const string CommandPrefix = @"[-/]";
 
 		public static List<System.Reflection.FieldInfo> GetAll =>
-			new Const().GetType().GetFields().ToList();
+			typeof(Const).GetFields().ToList();
 
 		public static string GetValue(string value)
 		{

@@ -1,12 +1,13 @@
 using System;
+using System.Collections.Generic;
 
-using scryptdnx.Utils;
+using Scryptdnx.Utils;
 
-namespace scryptdnx.CommandLine
+namespace Scryptdnx.CommandLine
 {
 	public class Param
 	{
-		public string[] Cmds { get; set; }
+		public IEnumerable<string> Cmds { get; set; }
 
 		public string Help { get; set; }
 
