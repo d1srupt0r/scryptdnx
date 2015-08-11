@@ -39,6 +39,17 @@ namespace Scryptdnx.Utils
                 public static string Flip(this IEnumerable<char> value) =>
                     value.Reverse().String();
 
+                public static string Hex<T>(this T value)
+                {
+                    // ToDo: optimize this, does it really need two methods?
+                    var val = value.ToString();
+                    return val.All(x => (x >= '0' && x <= '9')
+                        || (x >= 'a' && x <= 'f')
+                        || (x >= 'A' && x <= 'F'))
+                        ? val.HexString().String()
+                        : BitConverter.ToString(_defaultEncoding.GetBytes(val)).Replace("-", string.Empty);
+                }
+
                 public static string HexColor(this string value)
                 {
                     int seed;
@@ -47,6 +58,16 @@ namespace Scryptdnx.Utils
                         : new Random(value.GetHashCode());
                     return string.Join(string.Empty, Enumerable.Repeat(0, 6)
                             .Select(i => Const.Hex[r.Next(Const.Hex.Length)]));
+                }
+
+                public static IEnumerable<char> HexString<T>(this T value)
+                {
+                    var val = value.ToString();
+                    for (int i = 0; i < val.Length; i += 2)
+                    {
+                        var hs = val.Substring(i, 2);
+                        yield return Convert.ToChar(Convert.ToUInt32(hs, 16));
+                    }
                 }
 
                 public static string Limit<T>(this T value, int size = 30)
@@ -63,6 +84,13 @@ namespace Scryptdnx.Utils
 
                 public static T[] ReplaceAll<T>(this T[] array, string pattern, Func<T, T> action) =>
                     array.Select(x => pattern.ToRegex().IsMatch(x.ToString()) ? action(x) : x).ToArray();
+
+                public static string Rot(this string value, int size = 13)
+                {
+                    // ToDo: fix issues with string size, split alphabet then use as key
+                    var key = Const.Alphabet.Substring(size, Const.Alphabet.Length);
+                    return string.Join(string.Empty, key);
+                }
 
                 public static string String<T>(this IEnumerable<T> values, string separator = null) =>
                     string.Join(separator ?? string.Empty, values);
