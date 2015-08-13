@@ -4,7 +4,8 @@
 xbuild /nologo /verbosity:quiet
 
 # LOG
-gendarme --quiet --log todo.log --html bin/gendarme.html  bin/scryptdnx.exe
+gendarme --quiet --html bin/gendarme.html bin/scryptdnx.exe
+grep -rn "ToDo" --include="*.cs" > todo.log
 
 # RUN
 mono bin/scryptdnx.exe $@
