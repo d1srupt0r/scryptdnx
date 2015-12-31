@@ -12,7 +12,7 @@ namespace Scryptdnx.CommandLine
 			new Param(new[] { "/help" }, "Display [h]elp")
 			,new Param(new[] { "/v", "/verbose" }, "Display [v]erbose output", ParamType.Trigger)
 			,new Param(1, new[] { "/c", "/cipher" }, (x, k) => x.Cipher(k), "Run [c]ipher on text using a [k]ey (default Z:W)", ParamType.Crypto)
-			,new Param(2, new[] { "/r", "/rot" }, (x, k) => x.Rot(), "", ParamType.Command)
+			,new Param(2, new[] { "/r", "/rot" }, (x, k) => x.Rot(k), "", ParamType.Crypto)
 			,new Param(2, new[] { "/f", "/flip" }, (x, k) => x.Flip(), "Execute character [f]lip on text", ParamType.Command)
 			,new Param(3, new[] { "/e", "/encode" }, (x, k) => x.Encode(), "Base64 [e]ncode text", ParamType.Command)
 			,new Param(4, new[] { "/d", "/decode" }, (x, k) => x.Decode(), "Base64 [d]ecode text", ParamType.Command)
