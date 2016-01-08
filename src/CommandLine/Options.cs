@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -21,15 +22,34 @@ namespace Scryptdnx.CommandLine
 			,new Param(7, new[] { "/g", "/generator" }, (x, k) => x.HexColor(), "Random [g]enerator", ParamType.Command)
 		};
 
-		public string[] Junk;
-
-		public IEnumerable<Param> Params { get; set; }
-
-		public bool Verbose { get; set; }
-
-        public static IEnumerable<Param> GetAll(params string[] args) =>
-			args.ReplaceAll(@"(--|-)", "/")
+        public Options(params string[] args)
+        {
+            Junk = args.String()
+                .Split(args.Parse(Const.CommandPrefix + @"\S+"), StringSplitOptions.RemoveEmptyEntries)
+                .ReplaceAll(Const.AliasPrefix, Const.GetValue)
+                .ToArray();
+                
+            Params = args.ReplaceAll(@"(--|-)", "/")
                 .SelectMany(value => _list.Where(param => param.Cmds.Contains(value)))
                 .OrderBy(o => o.Order);
+            Verbose = Params.Any(o => o.Cmds.Contains("/v"));
+            Help = Params.Any(o => o.Cmds.Contains("/help"));
+        }
+        
+        public void Clear()
+        {
+            Params = new List<Param>();    
+        }
+
+        public bool Help { get; private set; }
+        
+		public IList<string> Junk { get; private set; }
+        
+        public List<Param> List => 
+            _list.OrderBy(o => o.Order).ToList();
+
+		public IEnumerable<Param> Params { get; private set; }
+
+		public bool Verbose { get; private set; }
 	}
 }

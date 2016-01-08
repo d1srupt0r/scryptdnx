@@ -19,16 +19,10 @@ namespace Scryptdnx
             {
                 Console.WriteLine(e.Message);
 #if DEBUG
-                    Console.WriteLine(e.StackTrace);
+                Console.WriteLine(e.StackTrace);
 #endif
             }
         }
-
-        private static string[] Combine(params string[] values) =>
-            values.String()
-                .Split(values.Parse(Const.CommandPrefix + @"\S+"), StringSplitOptions.RemoveEmptyEntries)
-                .ReplaceAll(Const.AliasPrefix, Const.GetValue)
-                .ToArray();
 
         private static string Execute(Param option, string value)
         {
@@ -47,7 +41,7 @@ namespace Scryptdnx
 
         private static void ExecuteAll()
         {
-            for (int i = 0; i < po.Junk.Length; i++)
+            for (int i = 0; i < po.Junk.Count; i++)
             {
                 foreach (var option in po.Params)
                 {
@@ -59,13 +53,13 @@ namespace Scryptdnx
 
         private static void Init(string[] args)
         {
-            // ToDo:
-            po = new Options {
-                Params = Options.GetAll(args),
-                Junk = Combine(args)
-            };
+            po = new Options(args);
 
-            po.Verbose = po.Params.Any(o => o.Cmds.Contains("/v"));
+            if (po.Help || !po.Params.Any())
+            {
+                po.List.ForEach(Console.WriteLine);
+                po.Clear();
+            }
             if (po.Verbose)
                 Console.WriteLine(args.String(","));
         }

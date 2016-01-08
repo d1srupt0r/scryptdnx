@@ -16,7 +16,7 @@ namespace Scryptdnx.Utils
             var swap = char.ToLower(@"[a-z]:[a-z]".ToRegex().IsMatch(k)
                 .Default(k, "Z:W")
                 .Split(':').Select(x => char.Parse(x)).Min());
-            var map = Const.Alphabet.Split(swap).SelectMany(g => g.Reverse()).String() + swap;
+            var map = Const.Alphabet.Split(swap).SelectMany(g => g.Reverse()).String() + swap.ToString();
             return value.Swap(map).String();
         }
 
