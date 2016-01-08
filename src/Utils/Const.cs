@@ -5,13 +5,13 @@ namespace Scryptdnx.Utils
 {
 	public static class Const
 	{
-		public static readonly string AliasPrefix = @"[@#]";
+		public const string AliasPrefix = @"[@#]";
 
-		public static readonly string Alphabet = @"abcdefghijklmnopqrstuvwxyz";
+		public const string Alphabet = @"abcdefghijklmnopqrstuvwxyz";
 
-		public static readonly string Hex = @"0123456789abcdef";
+		public const string Hex = @"0123456789abcdef";
 
-		public static readonly string CommandPrefix = @"[-/]";
+		public const string CommandPrefix = @"[-/]";
 
 		public static string GetValue(string value)
 		{

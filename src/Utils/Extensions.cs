@@ -36,7 +36,7 @@ namespace Scryptdnx.Utils
         public static string Encode<T>(this T value) =>
             Convert.ToBase64String(_defaultEncoding.GetBytes(value.ToString()));
 
-        public static TResult f<T, TResult>(this T value, Func<T, TResult> selector) =>
+        public static TResult F<T, TResult>(this T value, Func<T, TResult> selector) =>
             selector(value);
 
         public static string Flip(this IEnumerable<char> value) =>
@@ -87,7 +87,7 @@ namespace Scryptdnx.Utils
 
         public static string Rot(this string value, string size = null)
         {
-            var s = size.ToInt().f(x => !x.HasValue || x > Const.Alphabet.Length ? 13 : x.Value);
+            var s = size.ToInt().F(x => !x.HasValue || x > Const.Alphabet.Length ? 13 : x.Value);
             var map = string.Join("",
                 Const.Alphabet.Substring(s, Const.Alphabet.Length - s),
                 Const.Alphabet.Substring(0, s));

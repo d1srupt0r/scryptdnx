@@ -5,7 +5,8 @@ using System.Reflection;
 using Scryptdnx.Utils;
 using Scryptdnx.CommandLine;
 
-[assembly: AssemblyVersionAttribute("0.0.1.*")]
+[assembly: AssemblyVersionAttribute("0.0.1.*"),
+           CLSCompliantAttribute(true)]
 namespace Scryptdnx
 {
     public static class Program
