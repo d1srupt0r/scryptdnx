@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-using Scryptdnx.Utils;
 using Scryptdnx.CommandLine;
+using Scryptdnx.Utils;
 
 [assembly: AssemblyVersionAttribute("0.0.1.*"),
            CLSCompliantAttribute(true)]
@@ -46,8 +46,7 @@ namespace Scryptdnx
             {
                 foreach (var option in po.Params)
                 {
-                    if (option is Param)
-                        po.Junk[i] = Execute(option, po.Junk[i]);
+                    po.Junk[i] = Execute(option, po.Junk[i]);
                 }
             }
         }
