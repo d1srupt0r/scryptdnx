@@ -1,12 +1,12 @@
 # Scrypt DNX
 
-**scrypt** is a basic encoding / decoding utility namely written for use encoding and decoding [Base64](https://en.wikipedia.org/wiki/Base64) strings like the following:
+> This project is a full rewrite of my Script project using the [.NET Execution Environment (DNX)](http://bit.ly/1ZgvoeL) for use with cross-platform compilation.
+
+**Scrypt** is a basic encoding / decoding utility namely written for use encoding and decoding [Base64](https://en.wikipedia.org/wiki/Base64) strings like the following:
 
 ```
 VGhpcyBpcyBhIEJhc2U2NCBzdHJpbmcgYnVpbHQgdXNpbmcgdGhpcyB0b29sLg==
 ```
-
-This project is a full rewrite of my Script project using the [.NET Execution Environment (DNX)](http://bit.ly/1ZgvoeL) for use with cross-platform compilation.
 
 # Examples
 
